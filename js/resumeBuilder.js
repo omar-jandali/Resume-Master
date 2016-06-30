@@ -10,23 +10,21 @@ bio = dot notation object
 var bio = {
   "name" : "Omar Jandali",
   "role" : "Full Stack Web Developer",
-  "biopicture" : "http://cdn1-www.dogtime.com/assets/uploads/gallery/siberian-husky-dog-breed-pictures/siberian-husky-dog-breed-pictures-3.jpg",
-  "message" : "\"The best way to predict the future is to build it.\" - John D. Rockefeller Jr.",
+  "contact" : {
+    "twitter" : "@ItsMeOmarJ",
+    "github" : "omar-jandali",
+    "blog" : "www.omarjandali.com",
+    "location" : "Mission Viejo, CA",
+    "phone" : "(951) 534-3666",
+    "email" : "omar@omnacore.com"
+  },
+  "welcomeMessage" : "\"The best way to predict the future is to build it.\" - John D. Rockefeller Jr.",
   "skills" : [
     "Web Development",
     "Git/GitHub",
     "Bootstrap",
-    "HTML/CSS/Javascript"]
-};
-
-//This is the contact object with all of the contact information
-var contact = {
-  "twitter" : "@ItsMeOmarJ",
-  "github" : "omar-jandali",
-  "blog" : "www.omarjandali.com",
-  "location" : "Mission Viejo, CA",
-  "phone" : "(951) 534-3666",
-  "email" : "omar@omnacore.com"
+    "HTML/CSS/Javascript"],
+  "biopic" : "http://placehold.it/180x180"
 };
 
 var work = {
@@ -69,21 +67,21 @@ var projects = {
       "dates" : " June 2016 - work in progress",
       "description" : " This is a website that i want to build that is a place where people can go online and" +
       "input, rate, comment, and more for their favorite restaurant in Los Angeles and other major cities",
-      "images" : ""
+      "images" : "http://placecorgi.com/260/180"
     },
     {
       "title" : "Fyt",
       "dates" : "June 2016 - work in progress",
       "description" : "This is a website that i want to develop into an app. This app will become similar to a personal" +
       "trainer for those who want to get fyt and change their lives for the better.",
-      "images" : ""
+      "images" : "http://placecorgi.com/260/180"
     },
     {
       "title" : "Palit Website",
       "dates" : "July 2016",
       "description" : "This is a project that I will start working on later on in the year. I am assisting a close friend with" +
       "the website for his new and minimalistic clothing brand that he is building and working on. ",
-      "images" : ""
+      "images" : "http://placecorgi.com/260/180"
     },
   ]
 };
@@ -94,19 +92,19 @@ var education = {
       "name" : "Arizona State University - Online",
       "dates" : "2015 - 2017",
       "location" : "Temple, AZ",
-      "major" : "Marketing"
+      "major" : ["Marketing"]
     },
     {
       "name" : "Saddleback College",
       "dates" : "2013 - 2015",
       "location" : "Mission Viejo, CA",
-      "major" : "Marketing"
+      "major" : ["Marketing"]
     },
     {
       "name" : "La Sierra University",
       "dates" : "2011 - 2013",
       "location" : "Riverside, CA",
-      "major" : "Biology"
+      "major" : ["Biology"]
     }
   ],
   "online" : [
@@ -131,55 +129,48 @@ var education = {
   ]
 };
 
-bio.displayHeader = function(){
+bio.display = function(){
   var formattedName = HTMLheaderName.replace("%data%", bio.name);
   var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+  var formattedMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+  var formattedBioPicture = HTMLbioPic.replace("%data%", bio.biopic);
+
+  var formattedEmail = HTMLemail.replace("%data%", bio.contact.email);
+  var formattedPhone = HTMLmobile.replace("%data%", bio.contact.phone);
+  var formattedGitHub = HTMLgithub.replace("%data%", bio.contact.github);
+  var formattedTwitter = HTMLtwitter.replace("%data%", bio.contact.twitter);
+  var formattedBlog = HTMLblog.replace("%data%", bio.contact.blog);
+  var formattedLocation = HTMLlocation.replace("%data%", bio.contact.location);
 
   $("#header").prepend(formattedRole);
   $("#header").prepend(formattedName);
 
-  var formattedMessage = HTMLwelcomeMsg.replace("%data%", bio.message);
-  var formattedBioPicture = HTMLbioPic.replace("%data%", bio.biopicture);
+  $("#topContacts, #footerContacts").append(formattedPhone);
+  $("#topContacts, #footerContacts").append(formattedEmail);
+  $("#topContacts, #footerContacts").append(formattedGitHub);
+  $("#topContacts, #footerContacts").append(formattedTwitter);
+  $("#topContacts, #footerContacts").append(formattedBlog);
+  $("#topContacts, #footerContacts").append(formattedLocation);
 
   $("#header").append(formattedBioPicture);
   $("#header").append(formattedMessage);
-}
 
-bio.displaySkills = function(){
   if (bio.skills.length > 0) {
     $("#header").append(HTMLskillsStart);
 
-    var formattedSkills = HTMLskills.replace("%data%", bio.skills[0]);
-    $("#skills").append(formattedSkills);
-    formattedSkills = HTMLskills.replace("%data%", bio.skills[1]);
-    $("#skills").append(formattedSkills);
-    formattedSkills = HTMLskills.replace("%data%", bio.skills[2]);
-    $("#skills").append(formattedSkills);
-    formattedSkills = HTMLskills.replace("%data%", bio.skills[3]);
-    $("#skills").append(formattedSkills);
+    for (var i = 0; i < bio.skills.length; i++) {
+      var formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
+      $("#skills").append(formattedSkills);
+    }
+
   };
-}
 
-
-contact.display = function(){
-  var formattedEmail = HTMLemail.replace("%data%", contact.email);
-  var formattedPhone = HTMLmobile.replace("%data%", contact.phone);
-  var formattedGitHub = HTMLgithub.replace("%data%", contact.github);
-  var formattedTwitter = HTMLtwitter.replace("%data%", contact.twitter);
-  var formattedBlog = HTMLblog.replace("%data%", contact.blog);
-  var formattedLocation = HTMLlocation.replace("%data%", contact.location);
-
-  $("#topContacts").append(formattedPhone);
-  $("#topContacts").append(formattedEmail);
-  $("#topContacts").append(formattedGitHub);
-  $("#topContacts").append(formattedTwitter);
-  $("#topContacts").append(formattedBlog);
-  $("#topContacts").append(formattedLocation);
 }
 
 work.display = function(){
-  for(job in work.jobs){
-    $("#workExperience").append(HTMLworkStart);
+  $("#workExperience").append(HTMLworkStart);
+
+  for(var job = 0; job < work.jobs.length; job++){
 
     var workEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
     var workTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
@@ -209,12 +200,16 @@ projects.display = function(){
 
     var projectDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
     $(".project-entry:last").append(projectDescription);
+
+    var projectImages = HTMLprojectImage.replace("%data%", projects.projects[project].images);
+    $(".project-entry:last").append(projectImages);
   }
 }
 
 education.display = function(){
-  for (school in education.schools){
-    $("#education").append(HTMLschoolStart);
+  $("#education").append(HTMLschoolStart);
+
+  for (var school; school < education.schools.length; school++){
 
     var educationName = HTMLschoolName.replace("%data%", education.schools[school].name);
     var educationDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
@@ -229,7 +224,7 @@ education.display = function(){
 
   $(".education-entry:last").append(HTMLonlineClasses);
 
-  for (online in education.online){
+  for (var online; school < education.online.length; online++){
 
     var onlineTitle = HTMLonlineTitle.replace("%data%", education.online[online].title);
     var onlineSchool = HTMLonlineSchool.replace("%data%", education.online[online].school);
@@ -241,16 +236,6 @@ education.display = function(){
     $(".education-entry:last").append(onlineDates);
     $(".education-entry:last").append(onlineUrl);
   }
-}
-
-
-contact.displayed = function(){
-  $(".connect").append(formattedPhone);
-  $(".connect").append(formattedEmail);
-  $(".connect").append(formattedGitHub);
-  $(".connect").append(formattedTwitter);
-  $(".connect").append(formattedBlog);
-  $(".connect").append(formattedLocation);
 }
 
 function locationize(work_obj){
@@ -275,14 +260,11 @@ function inName(name){
 }
 inName(bio.name);
 
-bio.displayHeader();
-contact.display();
-bio.displaySkills();
+bio.display();
 work.display();
 projects.display();
 education.display();
 
 $("#mapDiv").append(googleMap);
 
-contact.displayed();
 $("#main").append(internationalizeButton);
