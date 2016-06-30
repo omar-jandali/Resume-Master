@@ -58,7 +58,7 @@ var work = {
       "help with website and blog design as well as development using Wordpress."
     }
   ]
-}
+};
 
 var projects = {
   "projects" : [
@@ -163,9 +163,9 @@ bio.display = function(){
       $("#skills").append(formattedSkills);
     }
 
-  };
+  }
 
-}
+};
 
 work.display = function(){
   $("#workExperience").append(HTMLworkStart);
@@ -186,10 +186,10 @@ work.display = function(){
     var workLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
     $(".work-entry:last").append(workLocation);
   }
-}
+};
 
 projects.display = function(){
-  for(project in projects.projects){
+  for(var project = 0; project < projects.projects.length; project++){
     $("#projects").append(HTMLprojectStart);
 
     var projectTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
@@ -204,12 +204,12 @@ projects.display = function(){
     var projectImages = HTMLprojectImage.replace("%data%", projects.projects[project].images);
     $(".project-entry:last").append(projectImages);
   }
-}
+};
 
 education.display = function(){
   $("#education").append(HTMLschoolStart);
 
-  for (var school; school < education.schools.length; school++){
+  for (var school = 0; school < education.schools.length; school++){
 
     var educationName = HTMLschoolName.replace("%data%", education.schools[school].name);
     var educationDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
@@ -224,7 +224,7 @@ education.display = function(){
 
   $(".education-entry:last").append(HTMLonlineClasses);
 
-  for (var online; school < education.online.length; online++){
+  for (var online = 0; online < education.online.length; online++){
 
     var onlineTitle = HTMLonlineTitle.replace("%data%", education.online[online].title);
     var onlineSchool = HTMLonlineSchool.replace("%data%", education.online[online].school);
@@ -236,12 +236,12 @@ education.display = function(){
     $(".education-entry:last").append(onlineDates);
     $(".education-entry:last").append(onlineUrl);
   }
-}
+};
 
 function locationize(work_obj){
   var Locations = [];
 
-  for(job in work_obj.jobs){
+  for(var job = 0; job < work_obj.jobs.length; job++){
     var location = work_obj.jobs[job].location;
     Locations.push(location);
   }
