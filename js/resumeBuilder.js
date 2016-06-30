@@ -10,13 +10,13 @@ bio = dot notation object
 var bio = {
   "name" : "Omar Jandali",
   "role" : "Full Stack Web Developer",
-  "contact" : {
+  "contacts" : {
+    "mobile" : "(951) 534-3666",
+    "email" : "omar@omnacore.com",
     "twitter" : "@ItsMeOmarJ",
     "github" : "omar-jandali",
-    "blog" : "www.omarjandali.com",
     "location" : "Mission Viejo, CA",
-    "phone" : "(951) 534-3666",
-    "email" : "omar@omnacore.com"
+    "blog" : "www.omarjandali.com",
   },
   "welcomeMessage" : "\"The best way to predict the future is to build it.\" - John D. Rockefeller Jr.",
   "skills" : [
@@ -67,21 +67,27 @@ var projects = {
       "dates" : " June 2016 - work in progress",
       "description" : " This is a website that i want to build that is a place where people can go online and" +
       "input, rate, comment, and more for their favorite restaurant in Los Angeles and other major cities",
-      "images" : "http://placecorgi.com/260/180"
+      "images" : [
+        "http://placecorgi.com/260/180"
+      ]
     },
     {
       "title" : "Fyt",
       "dates" : "June 2016 - work in progress",
       "description" : "This is a website that i want to develop into an app. This app will become similar to a personal" +
       "trainer for those who want to get fyt and change their lives for the better.",
-      "images" : "http://placecorgi.com/260/180"
+      "images" : [
+        "http://placecorgi.com/260/180"
+      ]
     },
     {
       "title" : "Palit Website",
       "dates" : "July 2016",
       "description" : "This is a project that I will start working on later on in the year. I am assisting a close friend with" +
       "the website for his new and minimalistic clothing brand that he is building and working on. ",
-      "images" : "http://placecorgi.com/260/180"
+      "images" : [
+        "http://placecorgi.com/260/180"
+      ]
     },
   ]
 };
@@ -90,24 +96,30 @@ var education = {
   "schools" : [
     {
       "name" : "Arizona State University - Online",
-      "dates" : "2015 - 2017",
       "location" : "Temple, AZ",
-      "major" : ["Marketing"]
+      "degree" : "Bachelors",
+      "dates" : "2015 - 2017",
+      "majors" : ["Marketing"],
+      "url" : "www.asu.edu"
     },
     {
       "name" : "Saddleback College",
-      "dates" : "2013 - 2015",
       "location" : "Mission Viejo, CA",
-      "major" : ["Marketing"]
+      "degree" : "Bachelors",
+      "dates" : "2013 - 2015",
+      "majors" : ["Marketing"],
+      "url" : "www.saddleback.edu"
     },
     {
       "name" : "La Sierra University",
-      "dates" : "2011 - 2013",
       "location" : "Riverside, CA",
-      "major" : ["Biology"]
+      "degree" : "Bachelors",
+      "dates" : "2011 - 2013",
+      "majors" : ["Biology"],
+      "url" : "www.lasierra.edu"
     }
   ],
-  "online" : [
+  "onlineCourses" : [
     {
       "title" : "Git and GitHub",
       "school" : "Udacity",
@@ -135,12 +147,12 @@ bio.display = function(){
   var formattedMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
   var formattedBioPicture = HTMLbioPic.replace("%data%", bio.biopic);
 
-  var formattedEmail = HTMLemail.replace("%data%", bio.contact.email);
-  var formattedPhone = HTMLmobile.replace("%data%", bio.contact.phone);
-  var formattedGitHub = HTMLgithub.replace("%data%", bio.contact.github);
-  var formattedTwitter = HTMLtwitter.replace("%data%", bio.contact.twitter);
-  var formattedBlog = HTMLblog.replace("%data%", bio.contact.blog);
-  var formattedLocation = HTMLlocation.replace("%data%", bio.contact.location);
+  var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
+  var formattedPhone = HTMLmobile.replace("%data%", bio.contacts.mobile);
+  var formattedGitHub = HTMLgithub.replace("%data%", bio.contacts.github);
+  var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
+  var formattedBlog = HTMLblog.replace("%data%", bio.contacts.blog);
+  var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
 
   $("#header").prepend(formattedRole);
   $("#header").prepend(formattedName);
@@ -168,9 +180,9 @@ bio.display = function(){
 };
 
 work.display = function(){
-  $("#workExperience").append(HTMLworkStart);
 
   for(var job = 0; job < work.jobs.length; job++){
+  $("#workExperience").append(HTMLworkStart);
 
     var workEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
     var workTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
@@ -209,45 +221,34 @@ projects.display = function(){
 education.display = function(){
   $("#education").append(HTMLschoolStart);
 
+  $("#education").append(HTMLonlineClasses);
   for (var school = 0; school < education.schools.length; school++){
 
     var educationName = HTMLschoolName.replace("%data%", education.schools[school].name);
-    var educationDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
     var educationLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
-    var educationMajor = HTMLschoolMajor.replace("%data%", education.schools[school].major);
+    var educationDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
+    var educationDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
+    var educationMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors);
 
-    $(".education-entry:last").append(educationName);
+    $(".education-entry:last").append(educationName + educationDegree);
     $(".education-entry:last").append(educationDates);
     $(".education-entry:last").append(educationLocation);
     $(".education-entry:last").append(educationMajor);
   }
 
-  $(".education-entry:last").append(HTMLonlineClasses);
 
-  for (var online = 0; online < education.online.length; online++){
+  for (var online = 0; online < education.onlineCourses.length; online++){
 
-    var onlineTitle = HTMLonlineTitle.replace("%data%", education.online[online].title);
-    var onlineSchool = HTMLonlineSchool.replace("%data%", education.online[online].school);
-    var onlineDates = HTMLonlineDates.replace("%data%", education.online[online].dates);
-    var onlineUrl = HTMLonlineURL.replace("%data%", education.online[online].url);
+    var onlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[online].title);
+    var onlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[online].school);
+    var onlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[online].dates);
+    var onlineUrl = HTMLonlineURL.replace("%data%", education.onlineCourses[online].url);
 
-    $(".education-entry:last").append(onlineTitle);
-    $(".education-entry:last").append(onlineSchool);
+    $(".education-entry:last").append(onlineTitle + onlineSchool);
     $(".education-entry:last").append(onlineDates);
     $(".education-entry:last").append(onlineUrl);
   }
 };
-
-function locationize(work_obj){
-  var Locations = [];
-
-  for(var job = 0; job < work_obj.jobs.length; job++){
-    var location = work_obj.jobs[job].location;
-    Locations.push(location);
-  }
-  return Locations;
-}
-locationize(work);
 
 function inName(name){
   name = name.trim().split(" ");
